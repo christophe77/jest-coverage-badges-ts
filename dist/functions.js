@@ -41,7 +41,7 @@ exports.getBadge = getBadge;
 function getBadgeByKey(reportType, reportName, outputPath) {
     const url = getBadge(reportType, reportName);
     let file = '';
-    (0, https_1.get)(url, res => {
+    (0, https_1.get)(url, (res) => {
         res.on('data', (chunk) => {
             file += chunk;
         });

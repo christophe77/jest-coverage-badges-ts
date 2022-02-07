@@ -45,8 +45,8 @@ export function getBadgeByKey(
 ) {
   const url = getBadge(reportType, reportName);
   let file = '';
-  get(url, res => {
-    res.on('data', (chunk): void => {
+  get(url, (res:any) => {
+    res.on('data', (chunk:any): void => {
       file += chunk;
     });
     res.on('end', (): void => {
@@ -55,7 +55,7 @@ export function getBadgeByKey(
         flag: 'w',
       });
     });
-  }).on('error', (err): void => {
+  }).on('error', (err:any): void => {
     throw err;
   });
 }
