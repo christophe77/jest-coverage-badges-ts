@@ -1,6 +1,6 @@
 {
   "name": "jest-coverage-badges-ts",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Create a group of coverage badges from jest",
   "repository": {
     "type": "git",
