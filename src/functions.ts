@@ -1,5 +1,7 @@
 import fs from 'fs';
 import { get } from 'https';
+import { IncomingMessage } from 'http';
+import path from 'path';
 import { ReportDetails } from './types';
 
 export function findArgument(argName: string, defaultOutput: string) {
@@ -45,12 +47,15 @@ export function getBadgeByKey(
 ) {
   const url = getBadge(reportType, reportName);
   let file = '';
-  get(url, (res:any) => {
+  get(url, (res:IncomingMessage) => {
     res.on('data', (chunk:any): void => {
       file += chunk;
     });
     res.on('end', (): void => {
-      fs.writeFileSync(`${outputPath}/badge-${reportName}.svg`, file, {
+      if (!fs.existsSync(outputPath)){
+        fs.mkdirSync(outputPath, { recursive: true });
+      }
+      fs.writeFileSync(path.join(outputPath, `badge-${reportName}.svg`), file, {
         encoding: 'utf8',
         flag: 'w',
       });

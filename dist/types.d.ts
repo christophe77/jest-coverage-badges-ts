@@ -1,10 +1,10 @@
-export declare type ReportDetails = {
+export type ReportDetails = {
     total: number;
     covered: number;
     skipped: number;
     pct: number;
 };
-declare type Total = {
+type Total = {
     lines: ReportDetails;
     statements: ReportDetails;
     functions: ReportDetails;
@@ -12,7 +12,7 @@ declare type Total = {
     branchesTrue: ReportDetails;
     [key: string]: ReportDetails;
 };
-export declare type Report = {
+export type Report = {
     total: Total;
 };
 export {};

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getBadgeByKey = exports.getBadge = exports.getColour = exports.findArgument = void 0;
 const fs_1 = __importDefault(require("fs"));
 const https_1 = require("https");
+const path_1 = __importDefault(require("path"));
 function findArgument(argName, defaultOutput) {
     if (!argName) {
         return defaultOutput;
@@ -46,7 +47,10 @@ function getBadgeByKey(reportType, reportName, outputPath) {
             file += chunk;
         });
         res.on('end', () => {
-            fs_1.default.writeFileSync(`${outputPath}/badge-${reportName}.svg`, file, {
+            if (!fs_1.default.existsSync(outputPath)) {
+                fs_1.default.mkdirSync(outputPath, { recursive: true });
+            }
+            fs_1.default.writeFileSync(path_1.default.join(outputPath, `badge-${reportName}.svg`), file, {
                 encoding: 'utf8',
                 flag: 'w',
             });
